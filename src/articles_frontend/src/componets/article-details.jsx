@@ -17,11 +17,20 @@ const ArtilceDetails = () => {
       .then((result) => {
         console.log(result, "comments");
       });
+
+      articles_backend.getArticle(id).then((result) => {
+        console.log(result, "article");
+        setData(result.ok);
+      });
   };
   const handlelikes = () => {
     articles_backend.likeAnArticle(id).then((result) => {
       console.log(result, "like");
     });
+     articles_backend.getArticle(id).then((result) => {
+        console.log(result, "article");
+        setData(result.ok);
+      });
   };
   useEffect(() => {
     articles_backend.getArticle(id).then((result) => {

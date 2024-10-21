@@ -94,6 +94,11 @@ actor devshub{
         case(?articleFound){
           //update likes
            let likesBuffer = Buffer.fromArray<Principal>(articleFound.likes);
+           //verify if the user has already liked
+           likesBuffer.filterEntries(func(_, x) = x  == caller);
+           if(likesBuffer.size() > 0){
+            return "already liked";
+           };
            likesBuffer.add(caller);
            let updatedLikes = Buffer.toArray(likesBuffer);
            let updatedArticle: Article = {
