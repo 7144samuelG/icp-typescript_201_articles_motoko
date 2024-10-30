@@ -29,7 +29,7 @@ actor devshub {
     // check if developer is already registered
     switch (devsonprincipals.get(caller)) {
 
-      // if developer is not registered yet
+      // if developer is not registered yet create a new developer
       case (null) {
         let newDeveloper : Developer = {
           principalId = caller;
@@ -62,7 +62,7 @@ actor devshub {
     };
   };
 
-  // function to write an article
+  // function to write an article by the developer
   public shared ({ caller }) func writeArticle(articleTitle : Text, articledescription : Text, articleavatar : Text) : async Text {
     let id : Text = Int.toText(Time.now());
 
@@ -100,8 +100,7 @@ actor devshub {
     };
   };
 
-  //like an article
-
+  //like an article function to like an article by the developer
   public shared ({ caller }) func likeAnArticle(articleId : Text) : async Text {
     //verify if developer is laready logged in
     switch (devsarticles.get(articleId)) {
@@ -162,6 +161,7 @@ actor devshub {
     };
   };
 
+  // function to add comment to the article
   public shared ({ caller }) func addCommentToArticle(articleId : Text, commentmessage : Text, username : Text) : async Text {
     //verify if developer is laready logged in
     let newComment : Comment = {
